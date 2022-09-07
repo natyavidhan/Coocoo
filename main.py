@@ -21,8 +21,13 @@ class App:
         self.hour_hand = self.analog_clock.create_line(72, 72, 72, 32, fill="#000000", width=3)
         self.minute_hand = self.analog_clock.create_line(72, 72, 72, 22, fill="#000000", width=3)
         self.second_hand = self.analog_clock.create_line(72, 72, 72, 12, fill="#000000", width=3)
-
         self.analog_clock.place(x=40, y=25, width=145, height=145)
+
+        self.time_label = tk.Label(self.clock, text=self.time.strftime("%H:%M:%S"), font=("Arial", 32), bg="#625E5E", fg="#ffffff")
+        self.time_label.place(x=0, y=175, width=230, height=60)
+
+        self.date_label = tk.Label(self.clock, text=self.time.strftime("%a %d %b %Y"), font=("Arial", 18), bg="#625E5E", fg="#ffffff")
+        self.date_label.place(x=0, y=235, width=230, height=40)
 
         self.update()
     
@@ -45,6 +50,8 @@ class App:
     def update(self):
         self.time = datetime.now()
         self.draw_analog_clock()
+        self.time_label.config(text=self.time.strftime("%H:%M:%S"))
+        self.date_label.config(text=self.time.strftime("%a %d %b %Y"))
         self.root.after(100, self.update)
 
 if __name__ == "__main__":
