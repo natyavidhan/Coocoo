@@ -7,7 +7,7 @@ class App:
     def __init__(self, root):
         self.root = root
         self.root.title("CooCoo")
-        self.root.geometry("800x325")
+        self.root.geometry("675x325")
         self.root.resizable(False, False)
         self.root.configure(bg="#2c2f33")
 
@@ -28,6 +28,17 @@ class App:
 
         self.date_label = tk.Label(self.clock, text=self.time.strftime("%a %d %b %Y"), font=("Arial", 18), bg="#625E5E", fg="#ffffff")
         self.date_label.place(x=0, y=235, width=230, height=40)
+
+        self.alarms_frame = tk.Frame(self.root, bg="#2c2f33")
+        self.alarms_frame.place(x=265, y=25, width=150, height=275)
+
+        tk.Label(self.alarms_frame, text="Alarms", font=("Arial", 18), bg="#2c2f33", fg="#ffffff").place(x=0, y=0, width=150, height=40)
+        self.alarms_list = tk.Listbox(self.alarms_frame, font=("Arial", 14), bg="#2c2f33", fg="#ffffff", highlightthickness=0, selectbackground="#ffffff", selectforeground="#000000")
+        self.alarms_list.place(x=0, y=40, width=150, height=235)
+        
+        alarms_scrollbar = tk.Scrollbar(self.alarms_frame, orient="vertical", command=self.alarms_list.yview)
+        alarms_scrollbar.place(x=130, y=40, width=20, height=235)
+        self.alarms_list.config(yscrollcommand=alarms_scrollbar.set)
 
         self.update()
     
